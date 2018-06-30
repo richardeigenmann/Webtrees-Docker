@@ -47,8 +47,9 @@ In particular to: https://wiki.webtrees.net/en/Users_Guide
 docker stop Webtrees_webserver
 docker stop Webtrees_php_fpm
 docker stop Webtrees_mysql_db
-docker ps -a
-docker rm <<container-id>>   # remove the container
+docker rm Webtrees_webserver
+docker rm Webtrees_php_fpm
+docker rm Webtrees_mysql_db
 docker network rm Webtrees-Net
 docker volume rm Webtrees-Data
 ```
