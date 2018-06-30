@@ -18,27 +18,6 @@ docker-compose up -d --build
 ```
 
 Then open: http://localhost:8180
-The Database paramters are:
-
-- Server name: Webtrees_mysql_db
-- Port number: 3306
-- Database user account: wt
-- Database password: password
-
-Database and table names:
-
-- Database name: webtrees
-- Table prefix: leave unchaged
-
-Administrator account
-
-- Your Name: Bob Smith
-- Username: bob
-- Password: password
-- E-mail address: nobody@gmail.com
-
-Now head over to: https://www.webtrees.net
-In particular to: https://wiki.webtrees.net/en/Users_Guide
 
 The Database paramters are:
 
