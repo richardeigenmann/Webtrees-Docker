@@ -1,0 +1,14 @@
+FROM php:7-fpm
+
+RUN apt-get update && apt-get install -y libpng-dev libfreetype6-dev libjpeg62-turbo-dev libxml2-dev unzip
+RUN docker-php-ext-install mysqli pdo pdo_mysql xml
+RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
+RUN docker-php-ext-install gd
+
+ADD https://launchpad.net/webtrees/1.7/1.7.9/+download/webtrees-1.7.9.zip /var/www/
+RUN cd /var/www \
+  && unzip /var/www/webtrees-1.7.9.zip \
+  && mv webtrees/* . \
+  && rmdir webtrees \
+  && rm webtrees-1.7.9.zip \
+  && printf "post_max_side = 40M\nupload_max_filesize = 40M\n" > /usr/local/etc/php/conf.d/php-upload.ini

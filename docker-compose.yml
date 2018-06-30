@@ -1,0 +1,50 @@
+# docker-compose up -d --build
+
+version: '3.2'
+services:
+    webserver:
+        container_name: Webtrees_webserver
+        restart: always
+        build:
+            context: .
+        volumes:
+            - type: volume
+              source: Webtrees-Data
+              target: /var/www/data
+              volume:
+                nocopy: false
+        ports:
+            - "8180:80"
+
+    php-fpm:
+        container_name: Webtrees_php_fpm
+        restart: always
+        build:
+            context: .
+            dockerfile: Dockerfile-php
+        volumes:
+            - type: volume
+              source: Webtrees-Data
+              target: /var/www/data
+              volume:
+                nocopy: false
+
+    database:
+        container_name: Webtrees_mysql_db
+        image: mysql/mysql-server:latest
+        command: mysqld --user=root --verbose
+        restart: always
+        environment:
+            MYSQL_DATABASE: "webtrees"
+            MYSQL_USER: "wt"
+            MYSQL_PASSWORD: "password"
+            MYSQL_ROOT_PASSWORD: "root-password"
+            MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+
+networks:
+   default:
+       external:
+          name: Webtrees-Net
+
+volumes:
+    Webtrees-Data:
