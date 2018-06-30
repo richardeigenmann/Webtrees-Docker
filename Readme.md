@@ -18,6 +18,27 @@ docker-compose up -d --build
 ```
 
 Then open: http://localhost:8180
+The Database paramters are:
+
+- Server name: Webtrees_mysql_db
+- Port number: 3306
+- Database user account: wt
+- Database password: password
+
+Database and table names:
+
+- Database name: webtrees
+- Table prefix: leave unchaged
+
+Administrator account
+
+- Your Name: Bob Smith
+- Username: bob
+- Password: password
+- E-mail address: nobody@gmail.com
+
+Now head over to: https://www.webtrees.net
+In particular to: https://wiki.webtrees.net/en/Users_Guide
 
 The Database paramters are:
 
@@ -54,6 +75,7 @@ docker volume rm Webtrees-Data
 ```
 
 ## Securing my data:
+
 The genealogy data is kept in the MySql database container that was started. If you stop and restart this container the data remains. If you delete this container the data is gone.
 
 To extract the genealogy data you captured in webtrees click on My page > Control panel > Family trees > Manage family trees > GEDCOM file Export > A file on your computer - continue. This will create a gedcom file that you can keep as a backup and can later import.
@@ -100,13 +122,13 @@ The database is not visible to the host and tools like phpmysqladmin will not fi
 
 ## Interacting with the running containers
 
-The command
+The below command lists all running containers.
 
 ```bash
 docker ps
 ```
 
-lists all running containers. You can connect to a running container and use the shell to check things:
+You can connect to a running container and use the shell to check things:
 
 ```bash
 docker exec -it Webtrees_webserver bash
@@ -114,6 +136,7 @@ docker exec -it Webtrees_php_fpm bash
 ```
 
 For instance the following command shows the contents of the webserver directory:
+
 ```bash
 ls /var/www
 ```
