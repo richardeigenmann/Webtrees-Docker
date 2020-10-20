@@ -15,6 +15,10 @@ docker volume create Webtrees-Data
 # if not, modify them in the file docker-compose.yml
 # under 'environmnet'!
 docker-compose up -d --build
+
+# If you get an error about the permissions log into the container and correct them
+docker exec -it Webtrees_webserver bash                            
+root@827bbf76cde7:/# chmod 777 /var/www/data
 ```
 
 Then open: http://localhost:8180
