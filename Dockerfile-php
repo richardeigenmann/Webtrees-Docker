@@ -5,11 +5,11 @@ RUN docker-php-ext-install mysqli pdo pdo_mysql xml intl zip
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 RUN docker-php-ext-install gd 
 
-ADD https://github.com/fisharebest/webtrees/releases/download/2.0.16/webtrees-2.0.16.zip  /var/www/
+ADD https://github.com/fisharebest/webtrees/releases/download/2.1.5/webtrees-2.1.5.zip  /var/www/
 RUN cd /var/www \
-  && unzip /var/www/webtrees-2.0.16.zip \
+  && unzip /var/www/webtrees-2.1.5.zip \
   && mv webtrees/* . \
   && rmdir webtrees \
-  && rm webtrees-2.0.16.zip \
+  && rm webtrees-2.1.5.zip \
   && printf "post_max_side = 40M\nupload_max_filesize = 40M\n" > /usr/local/etc/php/conf.d/php-upload.ini \
   && echo  "php_admin_value[post_max_size] = 100M" > /usr/local/etc/php-fpm.d/post_max_size.conf
