@@ -130,3 +130,9 @@ The webserver logs are redirected to stdout and stderr of the container and can 
 ```bash
 docker logs Webtrees_webserver
 ```
+
+You can interact with the database
+```bash
+docker exec -it Webtrees_mysql_db bash
+mysql -u root -p
+```
