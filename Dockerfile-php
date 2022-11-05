@@ -11,5 +11,6 @@ RUN cd /var/www \
   && mv webtrees/* . \
   && rmdir webtrees \
   && rm webtrees-2.1.5.zip \
+  && chmod 777 /var/www/data \
   && printf "post_max_side = 40M\nupload_max_filesize = 40M\n" > /usr/local/etc/php/conf.d/php-upload.ini \
   && echo  "php_admin_value[post_max_size] = 100M" > /usr/local/etc/php-fpm.d/post_max_size.conf
