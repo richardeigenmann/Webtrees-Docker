@@ -21,7 +21,7 @@ docker exec -it Webtrees_webserver bash
 root@827bbf76cde7:/# chmod 777 /var/www/data
 ```
 
-Then open: http://localhost:8180
+Then open: http://localhost
 
 The Database paramters are:
 
@@ -137,3 +137,14 @@ You can interact with the database
 docker exec -it Webtrees_mysql_db bash
 mysql -u root -p
 ```
+
+## Setting up Let's encrypt
+
+The server needs to be on the Internet and port 80 and 443 need to be visible.
+
+```bash
+docker exec -it Webtrees_webserver bash
+apt-get update && apt-get install --assume-yes certbot python3-certbot-nginx
+# Type in your email and accept the licence --> done
+```
+

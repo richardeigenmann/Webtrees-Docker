@@ -14,7 +14,8 @@ services:
               volume:
                 nocopy: false
         ports:
-            - "8180:80"
+            - "80:80"
+            - "443:443"
 
     php-fpm:
         container_name: Webtrees_php_fpm
