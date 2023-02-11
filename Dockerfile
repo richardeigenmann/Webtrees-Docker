@@ -9,13 +9,13 @@ RUN apt-get clean && apt-get update && apt-get install -y \
   && chown nginx:nginx /etc/init.d/fcgiwrap
 
 COPY vhost.conf /etc/nginx/conf.d/default.conf
-ADD https://github.com/fisharebest/webtrees/releases/download/2.1.7/webtrees-2.1.7.zip  /var/www/
+ADD https://github.com/fisharebest/webtrees/releases/download/2.1.16/webtrees-2.1.16.zip  /var/www/
 
 RUN cd /var/www \
-  && unzip /var/www/webtrees-2.1.7.zip \
+  && unzip /var/www/webtrees-2.1.16.zip \
   && mv webtrees/* . \
   && rmdir webtrees \
-  && rm webtrees-2.1.7.zip
+  && rm webtrees-2.1.16.zip
 
 CMD /etc/init.d/fcgiwrap start \
     && nginx -g 'daemon off;'

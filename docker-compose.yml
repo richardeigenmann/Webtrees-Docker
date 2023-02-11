@@ -16,6 +16,7 @@ services:
         ports:
             - "80:80"
             - "443:443"
+        # note that in the php container the file /var/www/data/config.ini.php also refers to the URL
 
     php-fpm:
         container_name: Webtrees_php_fpm
