@@ -145,6 +145,7 @@ The server needs to be on the Internet and port 80 and 443 need to be visible.
 ```bash
 docker exec -it Webtrees_webserver bash
 apt-get update && apt-get install --assume-yes certbot python3-certbot-nginx
-# Type in your email and accept the licence --> done
+certbot --nginx -d www.example.com
+nginx -t && nginx -s reload
 ```
 
