@@ -5,6 +5,7 @@ RUN apt-get clean && apt-get update && apt-get install -y \
   fcgiwrap \
   less vim \
   unzip \
+  certbot python3-certbot-nginx \ # for Let's encrypt certs
   && sed -i 's/www-data/nginx/g' /etc/init.d/fcgiwrap \
   && chown nginx:nginx /etc/init.d/fcgiwrap
 
