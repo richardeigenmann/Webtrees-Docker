@@ -4,7 +4,7 @@
 
 Webtrees is an open source web server application that renders genealogy data from a GEDCOM file in a nice navigatable web site. The data can be edited and pictures can be added. Check out their website.
 
-## Up and running in 5 minutes:
+## Up and running in 5 minutes
 
 ```bash
 git clone git@github.com:richardeigenmann/Webtrees-Docker.git
@@ -149,3 +149,9 @@ certbot --nginx -d www.example.com
 nginx -t && nginx -s reload
 ```
 
+## Renewing the Let's encrypt certificate
+
+```bash
+docker-compose run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ -d www.example.com \
+&& docker restart Webtrees_webserver
+```
