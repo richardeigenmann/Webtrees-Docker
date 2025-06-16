@@ -1,24 +1,33 @@
-# Webtrees-Docker
+# Running Webtrees on a Docker container
 
-## Abstract
+Webtrees is a really cool PHP-based web-application to show your family tree. The data comes from a GEDCOM file which is a standard format for genealogy data. Webtrees expects to be installed on a Webserver and to be told where to find a database for its state.
 
-Webtrees is an open source web server application that renders genealogy data from a GEDCOM file in a nice navigatable web site. The data can be edited and pictures can be added. Check out their website.
+In this project I use Docker Compose to build 3 Containers to run the application out of Docker leaving the underlying host unmodified.
 
-## Up and running in 5 minutes
+## What this is good for
+
+You can use this set-up to quickly start up Webtrees and give it a try. Or you can run your production deployment from it.
+
+I have a "primary" set-up running on my home machine which is not exposed to the Internet. I set up a secondary instance on the Oracle Cloud Always Free tier and periodically upload a fresh copy of my GEDCOM file there for Family to peruse.
+
+## Try it out: Up and running in 5 minutes
+
+Prerequisites: You need to have Docker set up and running and you need to install docker-compose which may not be bundled with Docker itself.
 
 ```bash
 git clone git@github.com:richardeigenmann/Webtrees-Docker.git
 cd Webtrees-Docker
 docker network create Webtrees-Net
 docker volume create Webtrees-Data
-# THINK: do you want default passwords on the db?
+# STOP AND THINK: do you want default passwords on the db?
 # if not, modify them in the file docker-compose.yml
-# under 'environmnet'!
+# under 'environment' first!
 docker-compose up -d --build
 
 # If you get an error about the permissions log into the container and correct them
 docker exec -it Webtrees_webserver bash                            
 root@827bbf76cde7:/# chmod 777 /var/www/data
+# Ctrl-D
 ```
 
 Then open: http://localhost
@@ -43,9 +52,10 @@ Administrator account
 - E-mail address: nobody@gmail.com
 
 Now head over to: https://www.webtrees.net
+
 In particular to: https://wiki.webtrees.net/en/Users_Guide
 
-## Cleaning up everything:
+## Tyding up and cleaning up everything
 
 ```bash
 docker-compose down --rmi all --volumes --remove-orphans
@@ -59,11 +69,11 @@ docker-compose down --rmi all --volumes --remove-orphans
 # docker volume rm Webtrees-Data
 ```
 
-## Securing my data:
+## Securing your data
 
 The genealogy data is kept in the MySql database container that was started. If you stop and restart this container the data remains. If you delete this container the data is gone.
 
-To extract the genealogy data you captured in webtrees click on My page > Control panel > Family trees > Manage family trees > GEDCOM file Export > A file on your computer - continue. This will create a gedcom file that you can keep as a backup and can later import.
+To extract the genealogy data you captured in Webtrees, click on My page > Control panel > Family trees > Manage family trees > GEDCOM file Export > A file on your computer - continue. This will create a gedcom file that you can keep as a backup and can later import.
 
 Media files that you upload are kept in the docker volume named Webrtrees-Data. This is mounted to the Webtrees_webserver and Webtrees_php_fpm container. These files will stay around for as long as the volume stays around. If you want to copy the images to a safe place use the `docker cp` command:
 
@@ -133,6 +143,7 @@ docker logs Webtrees_webserver
 ```
 
 You can interact with the database
+
 ```bash
 docker exec -it Webtrees_mysql_db bash
 mysql -u root -p
