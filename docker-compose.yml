@@ -44,9 +44,9 @@ services:
             MYSQL_ALLOW_EMPTY_PASSWORD: "no"
 
 networks:
-   default:
-       external:
-          name: Webtrees-Net
+  default:
+    external: true
+    name: Webtrees-Net
 
 volumes:
     Webtrees-Data:

@@ -1,16 +1,17 @@
-FROM php:8-fpm
+FROM php:8.5-rc-fpm-alpine3.21
 
-RUN apt-get update && apt-get install -y libpng-dev libfreetype6-dev libjpeg62-turbo-dev libxml2-dev unzip libzip-dev
+RUN apk update && apk add --no-cache libpng-dev freetype-dev libjpeg-turbo-dev libxml2-dev unzip zlib-dev libzip-dev icu-dev
 RUN docker-php-ext-install mysqli pdo pdo_mysql xml intl zip
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 RUN docker-php-ext-install gd 
 
-ADD https://github.com/fisharebest/webtrees/releases/download/2.1.16/webtrees-2.1.16.zip  /var/www/
+ADD https://github.com/fisharebest/webtrees/releases/download/2.2.4/webtrees-2.2.4.zip /var/www/
 RUN cd /var/www \
-  && unzip /var/www/webtrees-2.1.16.zip \
+  && unzip /var/www/webtrees-2.2.4.zip \
   && mv webtrees/* . \
   && rmdir webtrees \
-  && rm webtrees-2.1.16.zip \
+  && rm webtrees-2.2.4.zip \
   && chmod 777 /var/www/data \
-  && printf "post_max_side = 40M\nupload_max_filesize = 40M\n" > /usr/local/etc/php/conf.d/php-upload.ini \
+  && echo  "php_admin_value[upload_max_filesize] = 100M" > /usr/local/etc/php-fpm.d/upload_max_filesize.conf \
   && echo  "php_admin_value[post_max_size] = 100M" > /usr/local/etc/php-fpm.d/post_max_size.conf
+
