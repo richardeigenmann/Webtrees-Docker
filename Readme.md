@@ -163,6 +163,6 @@ nginx -t && nginx -s reload
 ## Renewing the Let's encrypt certificate
 
 ```bash
-docker-compose run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ -d www.example.com \
+docker compose run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ -d www.example.com \
 && docker restart Webtrees_webserver
 ```

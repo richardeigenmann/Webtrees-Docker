@@ -1,6 +1,5 @@
-# docker-compose up -d --build
+# docker compose up -d --build
 
-version: '3.7'
 services:
     webserver:
         container_name: Webtrees_webserver
